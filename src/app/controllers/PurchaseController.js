@@ -1,9 +1,17 @@
 const Ad = require('../models/Ad');
+const PurchaseIntention = require('../models/PurchaseIntention');
 const User = require('../models/User');
 const Queue = require('../services/Queue');
 const PurchaseMail = require('../jobs/PurchaseMail');
 
 class PurchaseController {
+	async show(req, res) {
+		const { purchaseId } = req.params;
+		const purchaseIntention = await PurchaseIntention.findById(purchaseId).populate('user ad');
+
+		return res.json({ purchaseIntention });
+
+	}
 	async store(req, res) {
 		const { ad, content } = req.body;
 
@@ -14,8 +22,10 @@ class PurchaseController {
 			ad: purchaseAd,
 			user,
 			content
-		}).save()
-		return res.send();
+		}).save();
+
+		const purchaseIntention = await PurchaseIntention.create({ ad: purchaseAd, user });
+		return res.json(purchaseIntention);
 	}
 }
 

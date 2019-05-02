@@ -19,11 +19,15 @@ const Ad = new mongoose.Schema({
 		type: Number,
 		required: true
 	},
+	purchasedBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now
 	}
-})
+});
 
 Ad.plugin(mongoosePaginate);
 
