@@ -16,6 +16,8 @@ class PurchaseController {
 		const { ad, content } = req.body;
 
 		const purchaseAd = await Ad.findById(ad).populate('author');
+
+		if (purchaseAd.purchasedBy) return res.json({ error: 'This Ad has already been sold' })
 		const user = await User.findById(req.userId);
 
 		Queue.create(PurchaseMail.key, {

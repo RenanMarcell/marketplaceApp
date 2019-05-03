@@ -20,4 +20,6 @@ routes.delete('/ads/:id', handle(controllers.AdController.delete));
 routes.post('/purchases', validate(validators.Purchase), handle(controllers.PurchaseController.store));
 routes.get('/purchases/:purchaseId', handle(controllers.PurchaseController.show));
 
+routes.put('/sell/:purchaseId', handle(controllers.SellController.update))
+
 module.exports = routes;
