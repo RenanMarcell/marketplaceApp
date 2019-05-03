@@ -22,3 +22,8 @@ Run redis:
 then start the application
 
 `yarn start`
+
+## How to use
+
+Register users, then log in with the sessions route. After this, you can start creating ads, updating and deleting them if needed.
+The purchases route you can place a purchased order, and then confirme the order in the sell route. Right now there is no authentication for the sell, any user can sell other users ads, but that can be easily implemented if anyone wants to use this API.
